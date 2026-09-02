@@ -67,7 +67,7 @@ export default function BayCard({ car, previewMode, onDetails }: Props) {
     >
       <div className={styles.media}>
         {still ? (
-          <img src={mediaUrl(`t/${still}`)} alt={name} loading="lazy" decoding="async" />
+          <img src={mediaUrl(`t/${still}`, { w: 480 })} alt={name} loading="lazy" decoding="async" />
         ) : (
           <div className={styles.plate} aria-hidden="true">
             <span className={styles.plateMake}>{car.make}</span>

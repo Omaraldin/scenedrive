@@ -28,9 +28,6 @@ const getPreviewMode = (): PreviewMode => {
 };
 const getPreviewModeServer = (): PreviewMode => "none";
 
-/* Per-category counts for the bay signage. */
-const counts: Record<Filter, number> = { all: fleet.length, supercar: 0, sports: 0, luxury: 0, suv: 0, classic: 0 };
-for (const car of fleet) counts[car.category] += 1;
 
 /** Reel first, then the SceneDrive card and the on-set still (deduped). */
 function lightboxItems(car: Car, t: Dictionary): LightboxItem[] {
@@ -78,13 +75,13 @@ export default function GarageGrid() {
             const on = filter === cat.id;
             return (
               <button key={cat.id} type="button" className={`${styles.sign} ${on ? styles.on : ""}`} aria-pressed={on} onClick={() => setFilter(cat.id)}>
-                {t.garage.filters[cat.id]} <span className={`${styles.n} num`}>{counts[cat.id]}</span>
+                {t.garage.filters[cat.id]}
               </button>
             );
           })}
         </div>
         <div className={styles.tools}>
-          <span className={`${styles.count} num`} aria-live="polite">{cars.length} {t.garage.count}</span>
+          
           <div className={styles.sort} role="group" aria-label={`${t.garage.sort.byMake} / ${t.garage.sort.az}`}>
             <button type="button" className={`${styles.sortBtn} ${sort === "make" ? styles.on : ""}`} aria-pressed={sort === "make"} onClick={() => setSort("make")}>{t.garage.sort.byMake}</button>
             <button type="button" className={`${styles.sortBtn} ${sort === "az" ? styles.on : ""}`} aria-pressed={sort === "az"} onClick={() => setSort("az")}>{t.garage.sort.az}</button>

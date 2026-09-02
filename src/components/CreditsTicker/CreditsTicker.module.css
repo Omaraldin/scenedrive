@@ -146,3 +146,10 @@ section.credits {
   .list[aria-hidden="true"] { display: none; }
   .item { white-space: normal; max-width: 100%; }
 }
+
+/* row 2: partner logos */
+.logos .track { animation-duration: 70s; animation-direction: reverse; }
+.logoItem { display: inline-flex; align-items: center; height: 88px; padding-inline: 34px; opacity: 0.86; transition: opacity 0.25s var(--ease), transform 0.25s var(--ease); }
+.logoItem img { display: block; height: 44px; width: auto; max-width: 190px; object-fit: contain; }
+.logoItem:hover, .logoItem:focus-visible { opacity: 1; transform: translateY(-2px); }
+@media (max-width: 700px) { .logoItem { height: 68px; padding-inline: 22px; } .logoItem img { height: 34px; max-width: 140px; } }

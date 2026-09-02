@@ -11,8 +11,8 @@ import { mediaUrl } from "@/lib/media";
  * Welad Rizk 2, the Hummer H2 desert take. BEFORE = the H2 on its wheels on the desert highway
  * (00:36 in the BTS cut); AFTER = frame 032 of the take sequence, the H2 settled on its side.
  */
-const BEFORE = mediaUrl("p/h2_before.jpg");
-const AFTER = mediaUrl("seq/h2_roll/032.webp");
+const BEFORE = mediaUrl("p/h2_before.jpg", { w: 1280 });
+const AFTER = mediaUrl("seq/h2_roll/032.webp", { w: 1280 });
 /** Where the divider settles after the scroll-in cut. */
 const REST = 50;
 

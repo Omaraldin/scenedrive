@@ -63,3 +63,8 @@
   .videoControls { inset-inline: 8px; bottom: 8px; grid-template-columns: 30px 1fr auto; gap: 8px; }
   .time { display: none; }
 }
+
+/* transport only while the pointer is over the picture (or a control has focus); touch keeps it visible */
+.videoControls { opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity 0.2s var(--ease), transform 0.2s var(--ease); }
+.videoWrap:hover .videoControls, .videoWrap:focus-within .videoControls { opacity: 1; transform: none; pointer-events: auto; }
+@media (hover: none) { .videoControls { opacity: 1; transform: none; pointer-events: auto; } }

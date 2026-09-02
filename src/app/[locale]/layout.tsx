@@ -79,7 +79,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        <link rel="preload" as="image" href={mediaUrl("loop/chase_palace.jpg")} fetchPriority="high" />
+        <link rel="preload" as="image" href={mediaUrl("loop/chase_palace.jpg", { w: 1600 })} fetchPriority="high" />
       </head>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />

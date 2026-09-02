@@ -35,7 +35,7 @@ export const ar: Dictionary = {
     bookMessage: "مرحبًا SceneDrive، أريد حجز سيارات لتصوير.",
   },
   credits: {
-    rowFilms: "أفلام ومسلسلات", rowBrands: "علامات تجارية",
+    rowFilms: "أفلام ومسلسلات", rowBrands: "علامات تجارية", rowLogos: "أعمال وعلامات عملنا معها",
     stats: { cars: { n: "أكثر", label: "مما يحتاجه أي موقع تصوير" }, productions: { n: "40", sup: "+", label: "عمل شاركنا فيه" }, since: { label: "في مواقع التصوير منذ" }, take: { n: "1", label: "لقطة صحراوية لا تُنسى" } },
   },
   garage: {
@@ -85,7 +85,7 @@ export const ar: Dictionary = {
     hint: "اختر عملًا لمشاهدته", showAll: "عرض الكل", showLess: "عرض أقل",
     ramadan: "رمضان",
     subtitle: { film: "فيلم", series: "مسلسل", ad: "إعلان", music: "كليب" },
-    links: { instagram: "منشور إنستجرام", youtube: "شاهد على يوتيوب" },
+    links: { instagram: "منشور إنستجرام", youtube: "شاهد على يوتيوب", page: "افتح الصفحة" },
     compareTitle: "في الموقع / على الشاشة", compareSub: "اسحب الشرطة. موبايل من الموقع على جانب، والنسخة النهائية على الجانب الآخر.",
     pairs: [
       { caption: "ولاد رزق 2 · مطاردة النفق · McLaren 12C Spider + Lamborghini Gallardo" },
@@ -110,6 +110,11 @@ export const ar: Dictionary = {
     message: { hi: "مرحبًا SceneDrive 👋", production: "الإنتاج", cars: "السيارات", dates: "التواريخ", location: "الموقع", action: "مشهد أكشن", from: "من", notes: "ملاحظات" },
     send: "أرسل على واتساب", email: "أو بالإيميل", emailSubject: "حجز", copy: "نسخ", copied: "تم النسخ", dm: "راسلنا على إنستجرام",
     sendHint: "أضف سيارة واحدة على الأقل أو ملاحظة ليعمل زر الإرسال.",
+  },
+  work: {
+    eyebrow: "على الشاشة", back: "كل الأعمال", cars: "سيارات هذا العمل", talent: "النجوم", year: "السنة", watch: "شاهد", stills: "صور",
+    cta: "احجز سيارات لمشهد مثل هذا", ctaMessage: "مرحبًا SceneDrive، أريد سيارات مثل التي في {title}.", more: "أعمال أخرى", inGarage: "في الجراج", openPage: "افتح الصفحة",
+    types: { film: "فيلم", series: "مسلسل", ad: "إعلان", music: "كليب" },
   },
   footer: {
     contact: "تواصل", nationwide: "القاهرة، مصر · في كل الجمهورية", links: "الأقسام",

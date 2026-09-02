@@ -52,7 +52,7 @@ export const fleet: Car[] = [
   c({ id: "bmw-i8-roadster", make: "BMW", model: "i8 Roadster", category: "supercar", role: "Butterfly doors, futuristic.", seenIn: ["Marwan Pablo"], reel: "DUvpV4YjHaL_03.mp4", card: "DUbrHc-DHwE_00.jpg", photo: "DYvR0YLjCCP_00.jpg" }),
   c({ id: "bmw-m4", make: "BMW", model: "M4", category: "sports", role: "Drift-ready.", seenIn: ["BMW Egypt"], reel: "DYvR0YLjCCP_00.mp4", photo: "DYvR0YLjCCP_00.jpg" }),
   c({ id: "bmw-8-series", make: "BMW", model: "8 Series", category: "luxury", role: "Red grand coupé.", card: "card_bmw-8-series.jpg", seenIn: ["BMW Egypt"], reel: "DYsEw42jH8T_02.mp4", photo: "DYsEw42jH8T_00.jpg" }),
-  c({ id: "bmw-6-convertible", make: "BMW", model: "6 Series Convertible", category: "luxury", role: "White convertible.", card: "card_bmw-6-convertible.jpg", seenIn: ["Mai Omar campaign"], reel: "DVuQbJ1DDpz_03.mp4", photo: "DVuQbJ1DDpz_00.jpg" }),
+  c({ id: "bmw-6-convertible", make: "BMW", model: "6 Series Convertible", category: "luxury", role: "White convertible.", card: "card_bmw-6-convertible.jpg", seenIn: ["Rivoli"], reel: "DVuQbJ1DDpz_03.mp4", photo: "DVuQbJ1DDpz_00.jpg" }),
   // Audi
   c({ id: "audi-r8", make: "Audi", model: "R8", category: "supercar", role: "Mid-engine, quattro.", card: "card_audi-r8.jpg", seenIn: ["El Ankaboot"], photo: "DVwqPYHjN1p_00.jpg" }),
   c({ id: "audi-tt-roadster", make: "Audi", model: "TT Roadster", category: "sports", role: "Red roadster.", card: "card_audi-tt-roadster.jpg", seenIn: [], photo: "DYHyIY6DC3B_00.jpg" }),
@@ -60,7 +60,7 @@ export const fleet: Car[] = [
   c({ id: "bentley-flying-spur", make: "Bentley", model: "Flying Spur", category: "luxury", role: "Chauffeur-class.", card: "card_bentley-flying-spur.jpg", seenIn: ["Welad Rizk 3"], reel: "DVu18sEDHZ3_01.mp4", photo: "DVu18sEDHZ3_00.jpg" }),
   c({ id: "maserati-granturismo", make: "Maserati", model: "GranTurismo", category: "sports", role: "Italian GT, orange.", seenIn: ["Orange"], reel: "DVM4JqliOwl_00.mp4", card: "DVM4JqliOwl_00.jpg" }),
   c({ id: "jaguar-f-pace", make: "Jaguar", model: "F-PACE", category: "suv", role: "Performance SUV.", card: "card_jaguar-f-pace.jpg", seenIn: ["Red Bull"], reel: "DVhOQ8DDAEK_01.mp4", photo: "DVhOQ8DDAEK_00.jpg" }),
-  c({ id: "gmc-hummer-h2", make: "GMC", model: "Hummer H2", category: "suv", role: "The one we rolled.", seenIn: ["Welad Rizk 2", "e& · Etisalat", "Coca-Cola"], reel: "DUn4epVDNEe_01.mp4", card: "DTtBQA6DJ48_00.jpg", photo: "DUn4epVDNEe_00.jpg" }),
+  c({ id: "gmc-hummer-h2", make: "GMC", model: "Hummer H2", category: "suv", role: "The desert take. Black, unstoppable.", seenIn: ["Welad Rizk 2", "e& · Etisalat", "Coca-Cola"], reel: "DUn4epVDNEe_01.mp4", card: "DTtBQA6DJ48_00.jpg", photo: "DUn4epVDNEe_00.jpg" }),
   c({ id: "jeep-wrangler", make: "Jeep", model: "Wrangler", category: "suv", role: "Off-road, camo.", seenIn: ["Welad Rizk 2"], reel: "DWNljgQCPiY_00.mp4", card: "DWNljgQCPiY_00.jpg" }),
   c({ id: "jeep-liberty", make: "Jeep", model: "Liberty", category: "suv", role: "Stunt-ready SUV.", seenIn: ["Khuda Haafiz 2"], reel: "DVpTFD9iAMC_00.mp4", photo: "DVpTFD9iAMC_00.jpg" }),
   c({ id: "ford-mustang-gt", make: "Ford", model: "Mustang GT", category: "classic", role: "American muscle, red.", seenIn: ["Welad Rizk"], reel: "DUED8g7DKV4_00.mp4", card: "DUED8g7DKV4_00.jpg" }),

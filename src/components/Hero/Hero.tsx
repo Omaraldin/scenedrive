@@ -58,7 +58,7 @@ export default function Hero() {
     for (let i = 1; i <= ROLL_FRAMES; i++) {
       const im = new Image();
       im.decoding = "async";
-      im.src = mediaUrl(`seq/h2_roll/${String(i).padStart(3, "0")}.webp`);
+      im.src = mediaUrl(`seq/h2_roll/${String(i).padStart(3, "0")}.webp`, { w: 1280 });
       imgs.push(im);
     }
     framesRef.current = imgs;
@@ -196,7 +196,7 @@ export default function Hero() {
                 ref={(el) => { screenRefs.current[i] = el; }}
                 className={`${styles.layer} ${i === beat ? styles.on : ""}`}
                 src={shouldLoad ? mediaUrl(`loop/${b.screen}.mp4`) : undefined}
-                poster={mediaUrl(`loop/${b.screen}.jpg`)}
+                poster={mediaUrl(`loop/${b.screen}.jpg`, { w: 1600 })}
                 muted
                 loop
                 playsInline
@@ -255,7 +255,7 @@ export default function Hero() {
                   ref={(el) => { monitorRefs.current[i] = el; }}
                   className={`${styles.mlayer} ${i === beat ? styles.on : ""}`}
                   src={shouldLoad ? mediaUrl(`loop/${b.monitor}.mp4`) : undefined}
-                  poster={mediaUrl(`loop/${b.monitor}.jpg`)}
+                  poster={mediaUrl(`loop/${b.monitor}.jpg`, { w: 800 })}
                   muted
                   loop
                   playsInline

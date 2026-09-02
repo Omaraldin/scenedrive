@@ -109,6 +109,7 @@ export default function FilmographyList() {
 
   const links = current
     ? [
+        { label: f.links.page, href: `${locale === "ar" ? "/ar" : ""}/work/${current.id}` },
         ...(current.post ? [{ label: f.links.instagram, href: `https://www.instagram.com/p/${current.post}/` }] : []),
         ...(current.youtube ? [{ label: f.links.youtube, href: `https://www.youtube.com/watch?v=${current.youtube}` }] : []),
       ]

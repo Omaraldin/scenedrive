@@ -3,7 +3,7 @@ export const site = {
   nameFull: "SceneDrive Egypt",
   tagline: "Egypt’s 1st & only cinematic car supplier",
   taglineAr: "سيارات الإنتاج السينمائي",
-  bio: "Supercars. Crash cars. Classics. Serving film, ads and music videos nationwide.",
+  bio: "Supercars. Classics. SUVs. Cars for any cinematic scene, nationwide.",
   since: 2014,
   phoneDisplay: "+20 110 051 2487",
   phoneE164: "201100512487",

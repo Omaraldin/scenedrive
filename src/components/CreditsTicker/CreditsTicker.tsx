@@ -1,5 +1,5 @@
 "use client";
-import { productions, brands } from "@/data/productions";
+import { productions } from "@/data/productions";
 import { site } from "@/data/site";
 import { useT } from "@/i18n/LocaleProvider";
 import type { Locale } from "@/i18n";
@@ -14,9 +14,6 @@ function titleItemsFor(locale: Locale): Item[] {
     .filter((p) => p.type === "film" || p.type === "series")
     .map((p) => ({ key: p.id, label: locale === "ar" ? p.titleAr ?? p.title : p.title, detail: { id: p.id } }));
 }
-
-/* Row 2: brand names stay Latin in both editions. */
-const brandItems: Item[] = brands.map((b) => ({ key: b, label: b, detail: { brand: b } }));
 
 function jump(id: string) {
   const el = document.getElementById(id);
@@ -56,6 +53,30 @@ function Row({ items, className, label }: { items: Item[]; className: string; la
   );
 }
 
+/** Row 2: partner logos, one marquee, click opens the credit. */
+function LogoRow({ label }: { label: string }) {
+  const logos = productions.filter((p) => p.logo && p.type !== "music");
+  const seen = new Set<string>();
+  const items = logos.filter((p) => { const k = p.logo as string; if (seen.has(k)) return false; seen.add(k); return true; });
+  const copy = (dup: boolean) => (
+    <div className={styles.list} aria-hidden={dup || undefined}>
+      {items.map((p) => (
+        <button key={p.id} type="button" className={styles.logoItem} tabIndex={dup ? -1 : 0} onClick={() => credit({ id: p.id })} title={p.title}>
+          <img src={`/partners/out/${p.logo}`} alt={p.title} loading="lazy" decoding="async" />
+        </button>
+      ))}
+    </div>
+  );
+  return (
+    <div className={`${styles.row} ${styles.logos}`} role="group" aria-label={label} onBlur={snapBack}>
+      <div className={styles.track}>
+        {copy(false)}
+        {copy(true)}
+      </div>
+    </div>
+  );
+}
+
 /** Trust bar under the hero: end-credits marquee of titles and brands, plus the four numbers that matter. */
 export default function CreditsTicker() {
   const { locale, t } = useT();
@@ -74,7 +95,7 @@ export default function CreditsTicker() {
       <h2 className="sr-only">{t.nav.credits}</h2>
       <div>
         <Row items={titleItemsFor(locale)} className={styles.titles} label={t.credits.rowFilms} />
-        <Row items={brandItems} className={styles.brands} label={t.credits.rowBrands} />
+        <LogoRow label={t.credits.rowLogos} />
       </div>
       <div className="wrap">
         <div className={styles.stats}>

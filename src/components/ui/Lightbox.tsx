@@ -116,7 +116,7 @@ export default function Lightbox({ open, onClose, title, subtitle, items, links 
                 </div>
               </div>
             ) : (
-              <img key={cur.src} src={mediaUrl(`p/${cur.src}`)} alt={`${title} · ${t.lightbox.still}`} className={styles.media} />
+              <img key={cur.src} src={mediaUrl(`p/${cur.src}`, { w: 1600 })} alt={`${title} · ${t.lightbox.still}`} className={styles.media} />
             )}
           </MonitorFrame>
         )}
@@ -124,7 +124,7 @@ export default function Lightbox({ open, onClose, title, subtitle, items, links 
           <div className={styles.strip} role="tablist" aria-label={t.lightbox.media}>
             {items.map((it, k) => (
               <button type="button" key={it.src + k} role="tab" aria-selected={k === i} className={`${styles.thumb} ${k === i ? styles.on : ""}`} onClick={() => setI(k)}>
-                {it.kind === "video" ? <img src={mediaUrl(`v/${it.src.replace(/\.mp4$/, ".jpg")}`)} alt="" /> : <img src={mediaUrl(`t/${it.src}`)} alt="" />}
+                {it.kind === "video" ? <img src={mediaUrl(`v/${it.src.replace(/\.mp4$/, ".jpg")}`, { w: 240 })} alt="" /> : <img src={mediaUrl(`t/${it.src}`, { w: 240 })} alt="" />}
                 {it.kind === "video" && <span className={styles.play} aria-hidden="true">▶</span>}
               </button>
             ))}

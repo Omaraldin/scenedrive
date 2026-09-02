@@ -33,7 +33,7 @@ export const en = {
     bookMessage: "Hi SceneDrive, I want to book cars for a shoot.",
   },
   credits: {
-    rowFilms: "Films and series", rowBrands: "Brands",
+    rowFilms: "Films and series", rowBrands: "Brands", rowLogos: "Productions and brands we worked with",
     stats: { cars: { n: "More", label: "Cars than any set needs" }, productions: { n: "40", sup: "+", label: "Productions credited" }, since: { label: "On set since" }, take: { n: "1", label: "Desert take everyone remembers" } },
   },
   garage: {
@@ -83,7 +83,7 @@ export const en = {
     hint: "Select a credit to watch it", showAll: "Show all", showLess: "Show less",
     ramadan: "Ramadan",
     subtitle: { film: "Film", series: "Series", ad: "Ad", music: "Music video" },
-    links: { instagram: "Instagram post", youtube: "Watch on YouTube" },
+    links: { instagram: "Instagram post", youtube: "Watch on YouTube", page: "Open page" },
     compareTitle: "On set / On screen", compareSub: "Drag the slash. Phone from set on the left, the finished cut on the right.",
     pairs: [
       { caption: "Welad Rizk 2 · tunnel chase · McLaren 12C Spider + Lamborghini Gallardo" },
@@ -108,6 +108,11 @@ export const en = {
     message: { hi: "Hi SceneDrive 👋", production: "Production", cars: "Cars", dates: "Dates", location: "Location", action: "Action scene", from: "From", notes: "Notes" },
     send: "Send on WhatsApp", email: "Email instead", emailSubject: "Booking", copy: "Copy", copied: "Copied", dm: "DM on Instagram",
     sendHint: "Add at least one car or a note and the send button goes live.",
+  },
+  work: {
+    eyebrow: "On screen", back: "All credits", cars: "Cars in this production", talent: "Talent", year: "Year", watch: "Watch", stills: "Stills",
+    cta: "Book cars for a scene like this", ctaMessage: "Hi SceneDrive, I want cars like in {title}.", more: "More credits", inGarage: "In the garage", openPage: "Open page",
+    types: { film: "Film", series: "Series", ad: "Ad", music: "Music video" },
   },
   footer: {
     contact: "Contact", nationwide: "Cairo, Egypt · nationwide", links: "Sections",
