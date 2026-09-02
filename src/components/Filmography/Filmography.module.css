@@ -1,0 +1,259 @@
+/* ── shell ─────────────────────────────────────────────────────────── */
+.inner { display: grid; gap: 56px; }
+.head { display: grid; gap: 18px; }
+.list { display: grid; gap: 0; }
+
+/* ── slate tabs ────────────────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  border-bottom: 1px solid var(--line);
+}
+.tablist { display: flex; gap: 28px; margin-bottom: -1px; }
+.tab {
+  padding: 12px 0 10px;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  white-space: nowrap;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.tab:hover { color: var(--paper); }
+.tabOn { color: var(--paper); border-bottom-color: var(--red); }
+.tabCount { margin-inline-start: 8px; color: var(--paper-mute); letter-spacing: 0.06em; }
+
+.aside { display: flex; align-items: baseline; gap: 22px; padding-bottom: 10px; }
+.hint {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--paper-mute);
+  white-space: nowrap;
+}
+.toggle {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  border-bottom: 1px solid transparent;
+  white-space: nowrap;
+  transition: border-color 0.2s var(--ease);
+}
+.toggle:hover { border-bottom-color: var(--amber); }
+.toggle[hidden] { display: none; }
+
+/* ── credits crawl ─────────────────────────────────────────────────── */
+.crawl {
+  position: relative;
+  height: 70vh;
+  overflow: clip;
+  /* room for the row hover bleed (rows pull out 12px each side) */
+  margin: 0 -12px;
+  padding: 0 12px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, var(--ink) 12%, var(--ink) 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, var(--ink) 12%, var(--ink) 88%, transparent);
+}
+.track { animation: crawl var(--crawl-dur, 45s) linear infinite; will-change: transform; }
+@keyframes crawl {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+.crawl:hover .track,
+.crawl:focus-within .track,
+.crawl[data-paused] .track { animation-play-state: paused; }
+.crawl[data-static] { height: auto; -webkit-mask-image: none; mask-image: none; }
+.crawl[data-static] .track { animation: none; }
+.crawl[data-static] .dupe { display: none; }
+
+.rows { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+.item + .item { border-top: 1px solid var(--line); }
+/* grid areas run in the inline direction, so the year column leads in both editions */
+.row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.9fr);
+  grid-template-areas: "year title cars talent";
+  column-gap: 24px;
+  align-items: baseline;
+  width: calc(100% + 24px);
+  margin: 0 -12px;
+  padding: 18px 12px;
+  text-align: start;
+  transition: background-color 0.2s var(--ease);
+}
+.row:hover, .row:focus-visible { background: var(--ink-2); }
+.year {
+  grid-area: year;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  color: var(--paper-dim);
+  transition: color 0.2s var(--ease);
+}
+.row:hover .year, .row:focus-visible .year { color: var(--amber); }
+.titleCell { grid-area: title; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+.moon { color: var(--amber); font-size: 18px; line-height: 1; }
+.title { font-size: 28px; font-weight: 700; }
+.cars {
+  grid-area: cars;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--paper-dim);
+}
+.talent { grid-area: talent; font-size: 14px; color: var(--paper-dim); }
+
+/* ── on set / on screen ────────────────────────────────────────────── */
+.compare { display: grid; gap: 32px; }
+.compareHead { display: grid; gap: 14px; }
+.sub { color: var(--paper-dim); }
+.pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.split { margin: 0; display: grid; gap: 12px; }
+
+/* The stage carries dir="ltr": the wipe (clip-path, --pos, the range input, the divider) is measured from the
+   left edge in every edition, so the physical offsets below are deliberate. */
+.stage {
+  --lean: 0px;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  overflow: hidden;
+  container-type: size;
+}
+/* the wipe leans like the slash: skewX(-18deg) over the full height is ±16.25% of it */
+@supports (width: 1cqh) { .stage { --lean: 16.25cqh; } }
+
+.final, .raw { position: absolute; inset: 0; }
+.final { z-index: 0; }
+.raw {
+  z-index: 1;
+  clip-path: polygon(0 0, calc(var(--pos) + var(--lean)) 0, calc(var(--pos) - var(--lean)) 100%, 0 100%);
+}
+.stage .monitor { position: absolute; inset: 0; }
+.stage .video { width: 100%; height: 100%; object-fit: cover; }
+.finalLabel {
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-shadow: 0 1px 2px var(--ink);
+}
+.finalLabel::before { content: ""; width: 8px; height: 8px; background: var(--red); }
+
+.range {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  touch-action: pan-y;
+}
+/* a range maps pointer x to value over (track - thumb), so a wide thumb makes the slash drift from the finger;
+   2px keeps it under the pointer, and the whole input is the hit area regardless of thumb size */
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 2px; height: 100%; }
+.range::-moz-range-thumb { width: 2px; height: 100%; border: 0; border-radius: 0; }
+
+.divider {
+  position: absolute;
+  top: -2px;
+  bottom: -2px;
+  left: calc(var(--pos) - 7px);
+  width: 14px;
+  z-index: 3;
+  background: var(--red);
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+.range:focus-visible + .divider { outline: 2px solid var(--amber); outline-offset: 2px; }
+.grip {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%) skewX(18deg);
+  border-radius: 50%;
+  background: var(--ink);
+  border: 1px solid var(--red);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  color: var(--paper);
+}
+@supports not (width: 1cqh) {
+  .divider { transform: none; }
+  .grip { transform: translate(-50%, -50%); }
+}
+
+.caption { display: flex; gap: 14px; align-items: baseline; font-size: 14px; color: var(--paper-dim); text-align: start; }
+.captionKey {
+  flex: none;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+/* ── Arabic edition: translated mono labels set in Tajawal, no tracking (it would pull the joined letters apart).
+   Tajawal goes first because the mono fallback face already covers Arabic glyphs. Digits keep the mono face. ── */
+[dir="rtl"] .tab,
+[dir="rtl"] .hint,
+[dir="rtl"] .toggle,
+[dir="rtl"] .captionKey,
+[dir="rtl"] .finalLabel {
+  font-family: var(--font-arabic-body), var(--font-mono), sans-serif;
+  letter-spacing: 0;
+}
+[dir="rtl"] .tabCount { font-family: var(--font-mono), Consolas, monospace; }
+
+/* ── mobile: plain list, stacked panels ────────────────────────────── */
+@media (max-width: 900px) {
+  .inner { gap: 48px; }
+  .aside { display: none; }
+  .tablist { gap: 20px; overflow-x: auto; scrollbar-width: none; }
+  .tablist::-webkit-scrollbar { display: none; }
+  .tab { letter-spacing: 0.1em; }
+  [dir="rtl"] .tab { letter-spacing: 0; }
+  .crawl { height: auto; -webkit-mask-image: none; mask-image: none; margin: 0 -8px; padding: 0 8px; }
+  .track { animation: none; }
+  .dupe { display: none; }
+  .row {
+    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-areas: "year title" "year cars" "year talent";
+    row-gap: 6px;
+    column-gap: 14px;
+    width: calc(100% + 16px);
+    margin: 0 -8px;
+    padding: 16px 8px;
+  }
+  .title { font-size: clamp(24px, 6.4vw, 28px); }
+  .pairs { grid-template-columns: 1fr; }
+  .stage { aspect-ratio: 4 / 5; }
+}
+
+/* ── reduced motion: static list, poster frames come from VideoLoop ── */
+@media (prefers-reduced-motion: reduce) {
+  .toggle { display: none; }
+  .crawl { height: auto; -webkit-mask-image: none; mask-image: none; }
+  .track { animation: none; }
+  .dupe { display: none; }
+}

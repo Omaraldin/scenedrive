@@ -1,0 +1,216 @@
+/* ---- section ground: red-deep to ink, one red slash crossing behind everything ---- */
+.scenes {
+  position: relative;
+  overflow: clip;
+  background: linear-gradient(180deg, var(--red-deep) 0%, var(--ink) 60%);
+}
+/* decorative; keeps its physical side and skew in both editions */
+.slashBg {
+  position: absolute;
+  top: -12%;
+  bottom: -12%;
+  left: 56%;
+  width: 12vw;
+  background: var(--red);
+  opacity: 0.15;
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+.inner {
+  position: relative;
+  display: grid;
+  gap: 56px;
+}
+
+.head { display: grid; gap: 20px; }
+.head h2 { max-width: 18ch; }
+
+/* ---- two columns: before/after at inline-start, monitors at inline-end ---- */
+.cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+/* ---- before / after (the H2 desert take) ----
+   The stage carries dir="ltr" in the markup (image control; clip-path inset is physical), so the
+   handle and its parts use physical left offsets on purpose. Labels are logical and auto-direction. */
+.compareWrap { display: grid; gap: 12px; }
+.compare {
+  --v: 100%;
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  user-select: none;
+  -webkit-user-select: none;
+}
+.compare img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.after { clip-path: inset(0 0 0 var(--v)); }
+
+.compare .lab {
+  position: absolute;
+  top: 10px;
+  z-index: 2;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  text-shadow: 0 1px 2px var(--ink);
+  pointer-events: none;
+  unicode-bidi: plaintext;
+}
+.labStart { inset-inline-start: 12px; }
+.labEnd { inset-inline-end: 12px; }
+
+/* the real control: full-size, invisible, keyboard and touch operable */
+.range {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  opacity: 0;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+.range::-webkit-slider-thumb { -webkit-appearance: none; width: 44px; height: 100%; }
+.range::-moz-range-thumb { width: 44px; height: 100%; border: 0; }
+.range::-moz-range-track { height: 100%; }
+
+/* the visible handle: clapper stick on a hairline (physical: lives inside the forced-LTR stage) */
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--v);
+  z-index: 2;
+  width: 0;
+  pointer-events: none;
+}
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1px;
+  width: 2px;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+.grip {
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  width: 48px;
+  transform: translateY(-50%);
+  display: grid;
+  gap: 5px;
+}
+.bar {
+  display: block;
+  height: 9px;
+  background: repeating-linear-gradient(-45deg, var(--red) 0 7px, var(--paper) 7px 14px);
+  box-shadow: 0 1px 3px var(--ink);
+  transition: transform 0.25s var(--ease);
+}
+.bar:first-child { transform-origin: 0 100%; transform: rotate(-16deg); }
+.compare:hover .bar:first-child,
+.range:focus-visible ~ .handle .bar:first-child { transform: rotate(-6deg); }
+.range:focus-visible ~ .handle .grip { outline: 2px solid var(--amber); outline-offset: 3px; }
+
+.scenes .hint { font-size: 12px; color: var(--paper-mute); }
+
+/* ---- monitors ---- */
+.monitors { display: grid; gap: 16px; align-content: start; }
+.fire { aspect-ratio: 16 / 9; }
+.sub {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: 16px;
+  align-items: end;
+}
+.subNote {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--paper-dim);
+}
+.slide { aspect-ratio: 16 / 9; }
+
+/* ---- what the unit covers: hairlines, no cards ---- */
+.covers {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.cover {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding-block: 26px 8px;
+  padding-inline: 0 32px;
+}
+.cover + .cover { border-inline-start: 1px solid var(--line); padding-inline-start: 32px; }
+.scenes .idx { font-size: 12px; letter-spacing: 0.14em; color: var(--red); }
+.cover p { font-size: 15px; color: var(--paper-dim); }
+
+/* ---- cta and credit ---- */
+.foot { display: grid; gap: 32px; }
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+.scenes .note { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--paper-dim); }
+.scenes .credit {
+  max-width: none;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+}
+
+/* ---- responsive ---- */
+@media (max-width: 900px) {
+  .inner { gap: 44px; }
+  .cols { grid-template-columns: 1fr; gap: 28px; }
+  .covers { grid-template-columns: 1fr; }
+  .cover { padding-block: 20px; padding-inline: 0; }
+  .cover + .cover { border-inline-start: 0; padding-inline-start: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 600px) {
+  .sub { grid-template-columns: 1fr; gap: 10px; }
+  .grip { left: -20px; width: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar { transition: none; }
+}
+
+/* the small monitor tag needs ~300px; stack the sub row before it can clip */
+@media (max-width: 1100px) {
+  .sub { grid-template-columns: 1fr; gap: 10px; }
+}

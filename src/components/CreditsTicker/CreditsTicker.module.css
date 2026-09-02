@@ -1,0 +1,148 @@
+/* Section: tighter than the rest, full-bleed rows then the numbers inside .wrap */
+section.credits {
+  padding: 48px 0;
+  display: grid;
+  gap: 40px;
+}
+
+/* ---- marquee rows ---- */
+.row {
+  position: relative;
+  overflow: hidden; /* a scroll container: keyboard focus reveals an off-screen item, Row snaps back on blur */
+  padding: 10px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.brands { border-top: 1px solid var(--line); }
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: slide 60s linear infinite;
+  will-change: transform;
+}
+.brands .track { animation-duration: 56s; animation-direction: reverse; }
+.row:hover .track { animation-play-state: paused; }
+/* keyboard: reset the transform so every first-copy item sits at a positive offset the row can scroll to */
+.row:focus-within .track { animation: none; }
+.item:focus-visible { scroll-margin-inline: 8%; }
+@keyframes slide { to { transform: translateX(-50%); } }
+/* RTL: the track overflows to the left, so the loop travels the other way or it would leave a blank half */
+[dir="rtl"] .track { animation-name: slide-rtl; }
+@keyframes slide-rtl { to { transform: translateX(50%); } }
+
+.list { display: flex; flex: none; align-items: center; }
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0 14px;
+  padding-block: 4px;
+  padding-inline: 0 20px;
+  white-space: nowrap;
+  color: var(--paper);
+  transition: color 0.25s var(--ease);
+}
+/* small red slash glyph before every credit */
+.item::before {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 0.72em;
+  margin-inline-end: 20px;
+  background: var(--red);
+  transform: skewX(-18deg);
+}
+.item:hover,
+.item:focus-visible { color: var(--amber); }
+
+/* row 1: film and series titles as end-credits display type */
+.titles .item {
+  font-family: var(--font-display), "Arial Narrow", Impact, sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 4.2vw, 46px);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+/* Arabic display type: same metrics globals.css gives .display under html[lang="ar"] */
+[dir="rtl"] .titles .item { letter-spacing: 0; line-height: 1.12; }
+
+/* row 2: brands, mono, dimmer, letterspaced */
+.brands .item {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+  padding-block: 6px;
+  padding-inline: 0 26px;
+}
+.brands .item::before { width: 6px; height: 12px; margin-inline-end: 26px; background: var(--line); }
+.brands .item:hover,
+.brands .item:focus-visible { color: var(--paper-dim); }
+
+/* ---- stat strip: one object, shared hairlines, no cards ---- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.stat {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 22px 24px;
+  background: var(--ink);
+  text-align: start;
+  text-decoration: none;
+  transition: background 0.25s var(--ease);
+}
+.n {
+  font-size: 40px;
+  line-height: 0.95;
+}
+.sup {
+  font-size: 0.55em;
+  vertical-align: top;
+  margin-inline-start: 2px;
+  color: var(--red);
+}
+/* bidi keeps "40+" left-to-right in Arabic too, so the gap belongs on the left of the plus */
+[dir="rtl"] .sup { margin-inline: 0 2px; }
+.l {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+[dir="rtl"] .l { letter-spacing: 0; }
+.link .n { color: var(--red); }
+.link:hover,
+.link:focus-visible { background: var(--ink-2); }
+.link:hover .l,
+.link:focus-visible .l { color: var(--paper); }
+
+@media (max-width: 700px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat { padding: 18px 16px; }
+}
+
+/* reduced motion: rows become a static wrapped list aligned to .wrap, no duplicate copy */
+@media (prefers-reduced-motion: reduce) {
+  .row { -webkit-mask-image: none; mask-image: none; }
+  .track {
+    animation: none;
+    width: auto;
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 0 var(--pad);
+  }
+  .list { flex: 1 1 auto; flex-wrap: wrap; min-width: 0; row-gap: 6px; }
+  .list[aria-hidden="true"] { display: none; }
+  .item { white-space: normal; max-width: 100%; }
+}

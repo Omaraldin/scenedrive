@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# media source dumps
+raw/
+
+# portfolio media is delivered by Cloudinary; generated key art remains local
+/public/media/loop/
+/public/media/p/
+/public/media/seq/
+/public/media/t/
+/public/media/v/
+/.qa-*/
+/qa-*.png

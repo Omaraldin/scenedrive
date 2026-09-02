@@ -1,0 +1,246 @@
+/* Garage — bay cards composed as one object. Tokens only, no raw hex. */
+
+.head { display: grid; gap: 18px; margin-bottom: 40px; }
+.head h2 { max-width: 14ch; }
+
+/* ── opener: 2.39:1 letterbox strip ─────────────────────────────── */
+.opener {
+  position: relative;
+  aspect-ratio: 2.39 / 1;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+.openerVideo { width: 100%; height: 100%; object-fit: cover; }
+.openerHud {
+  position: absolute; inset-inline: 14px; bottom: 10px;
+  display: flex; justify-content: space-between; gap: 12px;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--paper-dim);
+  text-shadow: 0 1px 2px var(--ink);
+  white-space: nowrap;
+}
+.openerHud b { color: var(--amber); font-weight: 500; }
+
+/* ── toolbar: bay signage ────────────────────────────────────────── */
+.toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 16px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.sign {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--paper-dim);
+  height: 34px; padding: 0 12px;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--line);
+  white-space: nowrap;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.sign:hover { color: var(--paper); border-color: var(--paper-mute); }
+.sign.on { color: var(--paper); background: var(--red); border-color: var(--red); }
+.sign .n { opacity: 0.7; }
+.tools { display: flex; align-items: center; gap: 14px; }
+.count {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--paper-mute);
+  white-space: nowrap;
+}
+.sort { display: inline-flex; border: 1px solid var(--line); }
+.sortBtn {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--paper-dim);
+  height: 32px; padding: 0 12px;
+  white-space: nowrap;
+  transition: color 0.2s var(--ease), background-color 0.2s var(--ease);
+}
+.sortBtn + .sortBtn { border-inline-start: 1px solid var(--line); }
+.sortBtn:hover { color: var(--paper); }
+.sortBtn.on { color: var(--paper); background: var(--ink-3); }
+
+/* ── grid ────────────────────────────────────────────────────────── */
+.grid {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-inline-start: 1px solid var(--line);
+}
+
+/* ── bay card ────────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--ink-2);
+  border-inline-end: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  transition: background-color 0.25s var(--ease);
+}
+.card:hover, .card:focus-within { background: var(--ink-3); }
+
+.media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink); }
+.media img { width: 100%; height: 100%; object-fit: cover; }
+.reel {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+  /* the reel mounts mid-hover (first hover fetches it), so fade it in on mount too, not only on transition */
+  animation: reelIn 0.3s var(--ease);
+}
+.card:hover .reel, .card:focus-within .reel { opacity: 1; }
+@keyframes reelIn { from { opacity: 0; } }
+
+.plate {
+  position: absolute; inset: 0;
+  display: grid; place-content: center; gap: 4px;
+  text-align: center; padding: 20px;
+}
+.plateMake {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper-dim);
+}
+.plateModel { font-size: 32px; }
+
+.body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+.make {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--paper-dim);
+  transition: color 0.25s var(--ease);
+}
+.card:hover .make, .card:focus-within .make { color: var(--amber); }
+.model { font-size: 26px; }
+.role { font-size: 14px; color: var(--paper-dim); }
+.seen {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11.5px; letter-spacing: 0.02em; line-height: 1.45;
+  color: var(--paper-mute);
+}
+.controls { display: flex; gap: 8px; margin-top: auto; padding-top: 14px; }
+.controls .details { height: 40px; font-size: 16px; padding-inline: 18px 14px; }
+.toggle {
+  flex: 1; min-width: 0;
+  height: 40px; padding: 0 10px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--paper-dim);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.toggle:hover { color: var(--paper); border-color: var(--paper-mute); }
+.toggle.on { color: var(--paper); border-color: var(--red); }
+
+/* Arabic UI copy must use the loaded Arabic face, never the Latin mono fallback. */
+:global(html[lang="ar"]) .seen,
+:global(html[lang="ar"]) .toggle,
+:global(html[lang="ar"]) .sign,
+:global(html[lang="ar"]) .sortBtn,
+:global(html[lang="ar"]) .count,
+:global(html[lang="ar"]) .lineupsNote,
+:global(html[lang="ar"]) .addAll {
+  font-family: var(--font-arabic-display), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global(html[lang="ar"]) .seen,
+:global(html[lang="ar"]) .count,
+:global(html[lang="ar"]) .lineupsNote {
+  font-family: var(--font-arabic-body), sans-serif;
+  font-weight: 400;
+}
+
+/* ── lineups strip ───────────────────────────────────────────────── */
+.lineups { margin-top: 56px; display: grid; gap: 16px; }
+.lineupsHead { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 20px; }
+.lineupsNote { font-family: var(--font-mono), Consolas, monospace; font-size: 12px; color: var(--paper-mute); }
+.panels {
+  list-style: none; margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.panel {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  isolation: isolate;
+}
+.panelArt {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scale(1.02);
+  transition: transform 0.9s var(--ease);
+}
+.panel:hover .panelArt, .panel:focus-within .panelArt { transform: scale(1.07); }
+.panelShade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(11, 11, 13, 0.92) 0%, rgba(11, 11, 13, 0.45) 45%, rgba(11, 11, 13, 0) 75%);
+}
+.panelBody {
+  position: absolute; inset-inline: 0; bottom: 0;
+  padding: 22px;
+  display: grid; gap: 10px; align-content: end; justify-items: start;
+}
+.panelTitle { font-size: clamp(28px, 3.2vw, 40px); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6); }
+.tileNo { font-family: var(--font-mono), Consolas, monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); text-shadow: 0 1px 2px var(--ink); }
+.tileCars { display: flex; flex-wrap: wrap; gap: 4px; align-content: start; }
+.tileCars .tag { background: rgba(11, 11, 13, 0.55); color: var(--paper); border-color: rgba(241, 237, 230, 0.25); }
+.addAll {
+  justify-self: start;
+  background: rgba(11, 11, 13, 0.6);
+  height: 36px; padding: 0 12px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--paper-dim);
+  white-space: nowrap;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.addAll:hover { color: var(--paper); border-color: var(--paper-mute); }
+.addAll.on { color: var(--paper); border-color: var(--red); }
+
+/* ── breakpoints ─────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panels { grid-template-columns: minmax(0, 1fr); }
+  .panel { aspect-ratio: 4 / 3; }
+  .panelBody { padding: 16px; }
+  .head { margin-bottom: 32px; }
+  .opener { margin-bottom: 32px; }
+  .lineups { margin-top: 48px; }
+}
+@media (max-width: 560px) {
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .tools { width: 100%; justify-content: space-between; }
+  .openerHud span:last-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reel { display: none; }
+}

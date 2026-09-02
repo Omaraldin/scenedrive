@@ -1,0 +1,110 @@
+.footer {
+  background: var(--ink-2);
+  border-top: 1px solid var(--line);
+  padding: 64px 0 28px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* wordmark block */
+.brand {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding-inline-start: 0.12em;
+}
+.wordmark {
+  font-size: 34px;
+  line-height: 1;
+  color: var(--paper);
+}
+.tagline {
+  font-size: 16px;
+  color: var(--paper-dim);
+  max-width: 34ch;
+  text-align: start;
+}
+
+/* columns */
+.col {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+  font-size: 15px;
+  color: var(--paper-dim);
+  text-align: start;
+}
+.colHead {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 6px;
+}
+.col a {
+  text-decoration: none;
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+.col a:hover,
+.col a:focus-visible {
+  color: var(--paper);
+  border-bottom-color: var(--red);
+}
+.plain { padding: 2px 0; }
+
+/* language switch, set apart from the anchors */
+.lang {
+  margin-top: 10px;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.lang:lang(ar) {
+  font-family: var(--font-arabic-display), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+:global(html[lang="ar"]) .colHead {
+  font-family: var(--font-arabic-display), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* rights line */
+.bottom {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--paper-mute);
+  text-align: start;
+}
+
+@media (max-width: 760px) {
+  .footer { padding: 48px 0 24px; }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .bottom { margin-top: 36px; }
+}

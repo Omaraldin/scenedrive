@@ -1,0 +1,359 @@
+.head {
+  display: grid;
+  gap: 18px;
+  margin-bottom: 48px;
+}
+
+/* Two columns; the grid mirrors on its own under [dir="rtl"]. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 32px;
+  align-items: start;
+}
+
+/* ---------- the sheet ---------- */
+.sheet {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+}
+.sheetHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-mute);
+}
+.sheetHead b {
+  font-weight: 500;
+  color: var(--amber);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 148px minmax(0, 1fr);
+  gap: 10px 20px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--line);
+  align-items: start;
+}
+.row:last-child { border-bottom: 0; }
+.label {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  line-height: 1.4;
+  padding-top: 10px;
+  text-align: start;
+}
+.control {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  justify-items: start;
+  text-align: start;
+}
+.control > * { max-width: 100%; }
+
+/* text controls */
+.input {
+  width: 100%;
+  justify-self: stretch;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 8px 0;
+  color: var(--paper);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: start;
+  transition: border-color 0.2s var(--ease);
+}
+.input::placeholder { color: var(--paper-mute); }
+.input:focus-visible {
+  outline: none;
+  border-bottom-color: var(--amber);
+}
+textarea.input {
+  resize: vertical;
+  min-height: 84px;
+}
+
+.selectWrap {
+  position: relative;
+  width: 100%;
+}
+/* Down chevron: symmetric shape, only its offset is logical. */
+.selectWrap::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 6px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid var(--paper-dim);
+  border-bottom: 1px solid var(--paper-dim);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-inline-end: 28px;
+  cursor: pointer;
+}
+.select option {
+  background: var(--ink-2);
+  color: var(--paper);
+}
+
+/* chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.chip {
+  position: relative;
+  cursor: pointer;
+}
+.chip span {
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    background-color 0.2s var(--ease);
+}
+.chip:hover span {
+  color: var(--paper);
+  border-color: var(--paper-mute);
+}
+.chip input:checked + span {
+  color: var(--paper);
+  border-color: var(--red);
+  background: var(--ink-3);
+}
+.chip input:focus-visible + span {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* car chip: name at the start, the × at the end */
+.car {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding-block: 0;
+  padding-inline: 12px 4px;
+  border: 1px solid var(--red);
+  color: var(--paper);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.remove {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--paper-dim);
+  transition: color 0.2s var(--ease);
+}
+.remove:hover,
+.remove:focus-visible { color: var(--paper); }
+
+.empty {
+  font-size: 14px;
+  color: var(--paper-mute);
+  padding-top: 8px;
+}
+.link {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+  padding: 2px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s var(--ease);
+}
+.link:hover,
+.link:focus-visible { border-bottom-color: var(--amber); }
+
+/* switch */
+.switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+}
+.track {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  border-radius: 11px;
+  border: 1px solid var(--line);
+  background: var(--ink-3);
+  transition:
+    background-color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+.track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  inset-inline-start: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper-dim);
+  transition:
+    transform 0.25s var(--ease),
+    background-color 0.2s var(--ease);
+}
+.switch[aria-checked="true"] .track {
+  background: var(--red);
+  border-color: var(--red);
+}
+.switch[aria-checked="true"] .track::after {
+  transform: translateX(20px);
+  background: var(--paper);
+}
+/* The knob travels towards the inline end, so it moves the other way in RTL. */
+[dir="rtl"] .switch[aria-checked="true"] .track::after { transform: translateX(-20px); }
+.switchText {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+}
+.switch[aria-checked="true"] .switchText { color: var(--paper); }
+
+/* ---------- the message ---------- */
+.preview {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 80px;
+}
+.monitor { min-height: 320px; }
+.msg {
+  margin: 0;
+  padding: 40px 18px 44px;
+  display: grid;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--paper);
+  text-align: start;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.dim { color: var(--paper-mute); }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.off { opacity: 0.45; }
+.hint {
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 12px;
+  color: var(--paper-mute);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 13px;
+  color: var(--paper-dim);
+}
+.copy {
+  display: inline-flex;
+  gap: 8px;
+  color: var(--paper-dim);
+  border-bottom: 1px dashed var(--paper-mute);
+  transition: color 0.2s var(--ease);
+}
+.copy:hover,
+.copy:focus-visible { color: var(--paper); }
+.copyState { color: var(--amber); }
+.contact a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition:
+    color 0.2s var(--ease),
+    border-color 0.2s var(--ease);
+}
+.contact a:hover,
+.contact a:focus-visible {
+  color: var(--paper);
+  border-color: var(--paper-mute);
+}
+
+/* Arabic edition: use Arabic faces explicitly instead of falling through Latin mono. */
+:global(html[lang="ar"]) .sheetHead,
+:global(html[lang="ar"]) .msg,
+:global(html[lang="ar"]) .hint,
+:global(html[lang="ar"]) .contact {
+  font-family: var(--font-arabic-body), sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+:global(html[lang="ar"]) .label,
+:global(html[lang="ar"]) .chip span,
+:global(html[lang="ar"]) .link,
+:global(html[lang="ar"]) .switchText {
+  font-family: var(--font-arabic-display), sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 900px) {
+  .head { margin-bottom: 36px; }
+  .grid { grid-template-columns: 1fr; }
+  .preview { position: static; }
+}
+@media (max-width: 600px) {
+  .sheetHead { padding: 10px 16px; }
+  .row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 14px 16px;
+  }
+  .label { padding-top: 0; }
+  .empty { padding-top: 0; }
+  .monitor { min-height: 280px; }
+  .msg { padding: 36px 14px 40px; }
+}
