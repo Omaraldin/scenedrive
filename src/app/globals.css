@@ -139,6 +139,7 @@ p { margin: 0; max-width: 62ch; }
 
 @media (max-width: 900px) {
   :root { --pad: 20px; --section-y: 64px; }
+  .section { scroll-margin-top: 96px; }
   h3 { font-size: 22px; }
   .lead { font-size: 18px; }
 }

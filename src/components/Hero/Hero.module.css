@@ -105,10 +105,10 @@
   .track, .stage, .screen { min-width: 100vw; min-width: 100dvw; max-width: none; }
   .layer { width: 100vw; width: 100dvw; max-width: none; }
   .bar { height: 0; }
-  .hud, .hudEnd { top: 74px; font-size: 11px; gap: 10px; }
+  .hud, .hudEnd { top: 106px; font-size: 11px; gap: 10px; }
   .hud { inset-inline-start: 16px; } .hudEnd { inset-inline-end: 16px; }
   .hudEnd span:first-child { display: none; }
-  .monitorWrap { width: 46%; inset-inline-end: 16px; bottom: auto; top: 108px; }
+  .monitorWrap { width: 46%; inset-inline-end: 16px; bottom: auto; top: 140px; }
   .caption { inset-inline: 16px; bottom: 56px; max-width: none; }
   .captionTitle { font-size: clamp(30px, 9vw, 48px); }
   .title { inset-inline: 16px; bottom: 56px; }
