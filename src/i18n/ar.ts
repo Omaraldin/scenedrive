@@ -45,7 +45,7 @@ export const ar: Dictionary = {
     openerBay: "مكان", openerNote: "القاهرة، مصر · بدون صوت",
     filters: { all: "الكل", supercar: "سوبركارز", sports: "رياضية", luxury: "فاخرة", suv: "دفع رباعي", classic: "كلاسيك" },
     sort: { byMake: "حسب الماركة", az: "أبجدي" }, count: "سيارة",
-    details: "التفاصيل", add: "أضف لورقة الحجز", added: "في ورقة الحجز ✓", seenIn: "ظهرت في",
+    details: "التفاصيل", add: "أضف لورقة الحجز", added: "في ورقة الحجز ✓", seenIn: "ظهرت في", loadingPreview: "جاري تحميل المعاينة",
     lineupsTitle: "تشكيلات نجحت من قبل", lineupsNote: "أضف المجموعة كلها بضغطة واحدة.", lineup: "تشكيلة", addAll: "أضف الكل", allAdded: "في ورقة الحجز ✓",
     lightboxSubtitle: "الجراج",
     roles: {

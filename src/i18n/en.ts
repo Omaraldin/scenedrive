@@ -43,7 +43,7 @@ export const en = {
     openerBay: "Bay", openerNote: "Cairo, Egypt · muted loop",
     filters: { all: "All", supercar: "Supercars", sports: "Sports", luxury: "Luxury", suv: "SUV & 4x4", classic: "Classics" },
     sort: { byMake: "By make", az: "A–Z" }, count: "cars",
-    details: "Details", add: "Add to call sheet", added: "On call sheet ✓", seenIn: "Seen in",
+    details: "Details", add: "Add to call sheet", added: "On call sheet ✓", seenIn: "Seen in", loadingPreview: "Loading preview",
     lineupsTitle: "Lineups that worked", lineupsNote: "Cast the whole set in one tap.", lineup: "Lineup", addAll: "Add all", allAdded: "On call sheet ✓",
     lightboxSubtitle: "Garage",
     roles: {

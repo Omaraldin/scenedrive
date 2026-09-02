@@ -48,6 +48,7 @@ export default function Hero() {
   const [clapped, setClapped] = useState(false);
   const reduced = useSyncExternalStore(subscribeReduce, getReduce, getReduceServer);
   const [warmRoll, setWarmRoll] = useState(false);
+  const [loadedThrough, setLoadedThrough] = useState(1);
   const beatRef = useRef(0);
 
   // Preload the H2 take frames once the visitor is a couple of beats away.
@@ -126,6 +127,8 @@ export default function Hero() {
         if (index !== beatRef.current) {
           beatRef.current = index;
           setBeat(index);
+          // Warm the next cut while retaining clips already requested.
+          setLoadedThrough((loaded) => Math.max(loaded, index + 1));
           // a two-frame white flash on every cut
           const fl = flashRef.current;
           if (fl && index > 0) {
@@ -185,23 +188,24 @@ export default function Hero() {
       <div className={styles.stage}>
         {/* screen layers */}
         <div className={styles.screen}>
-          {BEATS.map((b, i) =>
-            b.screen ? (
+          {BEATS.map((b, i) => {
+            const shouldLoad = i <= loadedThrough;
+            return b.screen ? (
               <video
                 key={b.id}
                 ref={(el) => { screenRefs.current[i] = el; }}
                 className={`${styles.layer} ${i === beat ? styles.on : ""}`}
-                src={mediaUrl(`loop/${b.screen}.mp4`)}
+                src={shouldLoad ? mediaUrl(`loop/${b.screen}.mp4`) : undefined}
                 poster={mediaUrl(`loop/${b.screen}.jpg`)}
                 muted
                 loop
                 playsInline
-                preload={i <= 1 ? "auto" : "metadata"}
+                preload={shouldLoad ? "auto" : "none"}
                 disablePictureInPicture
                 aria-hidden="true"
               />
-            ) : null
-          )}
+            ) : null;
+          })}
           {BEATS.map((b, i) =>
             b.image ? (
               <img key={b.id + "-img"} src={mediaUrl(b.image)} alt="" className={`${styles.layer} ${styles.art} ${i === beat ? styles.on : ""}`} aria-hidden="true" />
@@ -243,23 +247,24 @@ export default function Hero() {
         {/* monitor */}
         <div className={`${styles.monitorWrap} ${current.monitor ? styles.monitorOn : ""}`}>
           <MonitorFrame tag={current.monitorTag ?? t.hero.monitorDefault} timecode={`${t.hero.hud.cam} · RAW`} cam="" className={styles.monitor}>
-            {BEATS.map((b, i) =>
-              b.monitor ? (
+            {BEATS.map((b, i) => {
+              const shouldLoad = i <= loadedThrough;
+              return b.monitor ? (
                 <video
                   key={b.id}
                   ref={(el) => { monitorRefs.current[i] = el; }}
                   className={`${styles.mlayer} ${i === beat ? styles.on : ""}`}
-                  src={mediaUrl(`loop/${b.monitor}.mp4`)}
+                  src={shouldLoad ? mediaUrl(`loop/${b.monitor}.mp4`) : undefined}
                   poster={mediaUrl(`loop/${b.monitor}.jpg`)}
                   muted
                   loop
                   playsInline
-                  preload={i <= 1 ? "auto" : "metadata"}
+                  preload={i <= beat ? "auto" : "metadata"}
                   disablePictureInPicture
                   aria-hidden="true"
                 />
-              ) : null
-            )}
+              ) : null;
+            })}
           </MonitorFrame>
         </div>
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FocusEvent } from "react";
+import { useEffect, useRef, useState, type FocusEvent } from "react";
 import type { Car } from "@/data/fleet";
 import { useT } from "@/i18n/LocaleProvider";
 import { useCallSheet } from "@/lib/callsheet";
@@ -11,8 +11,7 @@ import { mediaUrl } from "@/lib/media";
 
 type Props = {
   car: Car;
-  /** mount hover reels at all (false on touch / no-hover pointers and under prefers-reduced-motion) */
-  hoverReel: boolean;
+  previewMode: "hover" | "inview" | "none";
   onDetails: (car: Car) => void;
 };
 
@@ -20,7 +19,7 @@ type Props = {
 type Reel = "cold" | "on" | "off";
 
 /** One bay: still (card > photo > plate), reel on hover, make/model/role/credits, Details + call-sheet toggle. */
-export default function BayCard({ car, hoverReel, onDetails }: Props) {
+export default function BayCard({ car, previewMode, onDetails }: Props) {
   const { t, locale } = useT();
   const { has, toggle } = useCallSheet();
   const on = has(car.id);
@@ -28,12 +27,25 @@ export default function BayCard({ car, hoverReel, onDetails }: Props) {
   // The reel is fetched on the first hover/focus only, never on scroll proximity. Once fetched it stays
   // mounted and paused (`active=false` → preload="metadata"), so the second hover is instant.
   const [reel, setReel] = useState<Reel>("cold");
+  const [reelReady, setReelReady] = useState(false);
+  const cardRef = useRef<HTMLLIElement>(null);
   const enter = () => setReel("on");
   const leave = () => setReel("off");
   const blur = (e: FocusEvent<HTMLLIElement>) => {
     if (!e.currentTarget.contains(e.relatedTarget as Node | null)) leave();
   };
-  const showReel = hoverReel && Boolean(car.reel) && reel !== "cold";
+  const showReel = previewMode !== "none" && Boolean(car.reel) && reel !== "cold";
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card || previewMode !== "inview" || !car.reel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setReel(entry.isIntersecting ? "on" : "off"),
+      { threshold: 0.6 },
+    );
+    observer.observe(card);
+    return () => observer.disconnect();
+  }, [car.reel, previewMode]);
 
   const still = car.card ?? car.photo;
   const poster = car.reel ? car.reel.replace(/\.mp4$/, ".jpg") : undefined;
@@ -43,14 +55,15 @@ export default function BayCard({ car, hoverReel, onDetails }: Props) {
 
   return (
     <li
+      ref={cardRef}
       id={`car-${car.id}`}
       className={styles.card}
       aria-labelledby={titleId}
       data-hover-scope
-      onPointerEnter={enter}
-      onPointerLeave={leave}
-      onFocus={enter}
-      onBlur={blur}
+      onPointerEnter={previewMode === "hover" ? enter : undefined}
+      onPointerLeave={previewMode === "hover" ? leave : undefined}
+      onFocus={previewMode === "hover" ? enter : undefined}
+      onBlur={previewMode === "hover" ? blur : undefined}
     >
       <div className={styles.media}>
         {still ? (
@@ -64,7 +77,21 @@ export default function BayCard({ car, hoverReel, onDetails }: Props) {
         {showReel && (
           // `active` drives play/pause from the card's own hover state: VideoLoop's hover listeners would only
           // attach after the pointerenter that mounted it, so the first hover would sit on the poster.
-          <VideoLoop mode="hover" active={reel === "on"} src={`v/${car.reel}`} poster={`v/${poster}`} className={styles.reel} />
+          <VideoLoop
+            mode="manual"
+            active={reel === "on"}
+            src={`v/${car.reel}`}
+            poster={`v/${poster}`}
+            className={`${styles.reel} ${reel === "on" ? styles.reelOn : ""}`}
+            onCanPlay={() => setReelReady(true)}
+            onWaiting={() => setReelReady(false)}
+          />
+        )}
+        {showReel && reel === "on" && !reelReady && (
+          <div className={styles.reelLoading} role="status" aria-label={t.garage.loadingPreview}>
+            <span />
+            <b>{t.garage.loadingPreview}</b>
+          </div>
         )}
       </div>
 

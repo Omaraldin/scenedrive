@@ -13,10 +13,12 @@ type Props = {
   active?: boolean;
   alt?: string;
   onReady?: (el: HTMLVideoElement) => void;
+  onCanPlay?: () => void;
+  onWaiting?: () => void;
 };
 
 /** Muted, looping, playsinline video that only runs when it should. Never seeks on scroll. */
-export default function VideoLoop({ src, poster, className = "", mode = "inview", active, alt = "", onReady }: Props) {
+export default function VideoLoop({ src, poster, className = "", mode = "inview", active, alt = "", onReady, onCanPlay, onWaiting }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -63,6 +65,9 @@ export default function VideoLoop({ src, poster, className = "", mode = "inview"
       loop
       playsInline
       preload={active === false ? "metadata" : "auto"}
+      onCanPlay={onCanPlay}
+      onPlaying={onCanPlay}
+      onWaiting={onWaiting}
       aria-label={alt || undefined}
       disablePictureInPicture
     />

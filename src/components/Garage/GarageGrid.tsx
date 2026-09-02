@@ -11,8 +11,10 @@ import styles from "./Garage.module.css";
 type Filter = Category | "all";
 type Sort = "make" | "az";
 
-/* Hover reels only make sense on hover-capable pointers (touch gets the still) and never under
-   prefers-reduced-motion: the CSS hides them, so mounting one would only fetch ~3 MB for nothing. */
+type PreviewMode = "hover" | "inview" | "none";
+
+/* Desktop previews on hover. Touch previews play only while a card is centered in the viewport.
+   Reduced-motion users keep the still image and do not download reels. */
 const HOVER_MQ = "(hover: hover) and (pointer: fine)";
 const REDUCE_MQ = "(prefers-reduced-motion: reduce)";
 function subscribeReels(cb: () => void) {
@@ -20,8 +22,11 @@ function subscribeReels(cb: () => void) {
   mqs.forEach((mq) => mq.addEventListener("change", cb));
   return () => mqs.forEach((mq) => mq.removeEventListener("change", cb));
 }
-const getReels = () => window.matchMedia(HOVER_MQ).matches && !window.matchMedia(REDUCE_MQ).matches;
-const getReelsServer = () => false;
+const getPreviewMode = (): PreviewMode => {
+  if (window.matchMedia(REDUCE_MQ).matches) return "none";
+  return window.matchMedia(HOVER_MQ).matches ? "hover" : "inview";
+};
+const getPreviewModeServer = (): PreviewMode => "none";
 
 /* Per-category counts for the bay signage. */
 const counts: Record<Filter, number> = { all: fleet.length, supercar: 0, sports: 0, luxury: 0, suv: 0, classic: 0 };
@@ -41,7 +46,7 @@ export default function GarageGrid() {
   const [filter, setFilter] = useState<Filter>("all");
   const [sort, setSort] = useState<Sort>("make");
   const [active, setActive] = useState<Car | null>(null);
-  const reels = useSyncExternalStore(subscribeReels, getReels, getReelsServer);
+  const previewMode = useSyncExternalStore(subscribeReels, getPreviewMode, getPreviewModeServer);
 
   const cars = useMemo(() => {
     const list = filter === "all" ? fleet : fleet.filter((c) => c.category === filter);
@@ -89,7 +94,7 @@ export default function GarageGrid() {
 
       <ul className={styles.grid} aria-label={t.garage.count}>
         {cars.map((car) => (
-          <BayCard key={car.id} car={car} hoverReel={reels} onDetails={open} />
+          <BayCard key={car.id} car={car} previewMode={previewMode} onDetails={open} />
         ))}
       </ul>
 

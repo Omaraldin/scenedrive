@@ -97,7 +97,23 @@
   animation: reelIn 0.3s var(--ease);
 }
 .card:hover .reel, .card:focus-within .reel { opacity: 1; }
+.reel.reelOn { opacity: 1; }
 @keyframes reelIn { from { opacity: 0; } }
+.reelLoading {
+  position: absolute; inset: 0; z-index: 2;
+  display: grid; place-content: center; justify-items: center; gap: 9px;
+  color: var(--paper); background: rgba(11, 11, 13, 0.35);
+  font-family: var(--font-mono), Consolas, monospace;
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  pointer-events: none;
+}
+.reelLoading span {
+  width: 28px; height: 28px; border: 2px solid var(--paper-mute);
+  border-top-color: var(--red); border-radius: 50%;
+  animation: reelSpin 0.7s linear infinite;
+}
+.reelLoading b { font: inherit; }
+@keyframes reelSpin { to { transform: rotate(360deg); } }
 
 .plate {
   position: absolute; inset: 0;
@@ -161,6 +177,7 @@
   letter-spacing: 0;
   text-transform: none;
 }
+:global(html[lang="ar"]) .reelLoading { font-family: var(--font-arabic-body), sans-serif; letter-spacing: 0; }
 
 :global(html[lang="ar"]) .seen,
 :global(html[lang="ar"]) .count,
