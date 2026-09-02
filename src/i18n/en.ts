@@ -28,7 +28,7 @@ export const en = {
       title: { label: "Cut", title: "SceneDrive" },
     },
     eyebrow: "Egypt · film · ads · music videos",
-    ctaBook: "Book on WhatsApp", ctaGarage: "See the garage", ctaDm: "DM @scenedrive.eg", skip: "Skip to the garage ↓",
+    ctaBook: "Book on WhatsApp", ctaGarage: "See the garage", ctaDm: "DM @scenedrive.eg", skip: "Skip to the garage ↓", keepScrolling: "Keep scrolling",
     railLabel: "Scene beats",
     bookMessage: "Hi SceneDrive, I want to book cars for a shoot.",
   },

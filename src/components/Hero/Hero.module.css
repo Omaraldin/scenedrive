@@ -93,6 +93,7 @@
 .skip { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 7; color: var(--paper-mute); letter-spacing: 0.1em; text-transform: uppercase; font-size: 11px; opacity: 0; transition: opacity 0.3s; }
 .skip.show { opacity: 1; }
 .skip:hover { color: var(--paper); }
+.mobileScroll { display: none; }
 
 /* reduced-motion static hero */
 .static { position: relative; min-height: 80vh; display: grid; align-items: end; background: #000; }
@@ -115,5 +116,27 @@
   .rail { display: none; }
   .bigmark { font-size: 28vw; }
   .hint { bottom: 60px; }
-  .skip { bottom: 14px; }
+  .hint, .skip { display: none; }
+  .mobileScroll {
+    position: absolute; left: 50%; bottom: 14px; z-index: 7;
+    display: flex; align-items: center; gap: 9px;
+    transform: translate(-50%, 8px); opacity: 0;
+    color: var(--paper); text-shadow: 0 1px 5px #000;
+    font-family: var(--font-mono), Consolas, monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    white-space: nowrap; pointer-events: none;
+    transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .mobileScrollOn { opacity: 0.9; transform: translate(-50%, 0); }
+  .mobileScroll i {
+    width: 8px; height: 8px;
+    border-inline-end: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg);
+    animation: mobileScrollCue 1.2s ease-in-out infinite;
+  }
+  @keyframes mobileScrollCue {
+    0%, 100% { translate: 0 -3px; opacity: 0.4; }
+    50% { translate: 0 3px; opacity: 1; }
+  }
 }

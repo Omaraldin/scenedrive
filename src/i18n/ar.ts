@@ -30,7 +30,7 @@ export const ar: Dictionary = {
       title: { label: "قطع", title: "SceneDrive" },
     },
     eyebrow: "مصر · سينما · إعلانات · كليبات",
-    ctaBook: "احجز على واتساب", ctaGarage: "شاهد الجراج", ctaDm: "راسلنا @scenedrive.eg", skip: "انتقل إلى الجراج ↓",
+    ctaBook: "احجز على واتساب", ctaGarage: "شاهد الجراج", ctaDm: "راسلنا @scenedrive.eg", skip: "انتقل إلى الجراج ↓", keepScrolling: "كمّل سحب لأسفل",
     railLabel: "لقطات المشهد",
     bookMessage: "مرحبًا SceneDrive، أريد حجز سيارات لتصوير.",
   },

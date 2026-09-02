@@ -304,6 +304,10 @@ export default function Hero() {
         </nav>
 
         <button className={`mono ${styles.skip} ${beat > 0 && !isTitle ? styles.show : ""}`} onClick={() => scrollToId("garage")}>{t.hero.skip}</button>
+        <div className={`${styles.mobileScroll} ${!isTitle ? styles.mobileScrollOn : ""}`} role="note">
+          <span>{t.hero.keepScrolling}</span>
+          <i aria-hidden="true" />
+        </div>
       </div>
     </section>
   );
