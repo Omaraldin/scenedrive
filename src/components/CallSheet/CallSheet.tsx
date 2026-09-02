@@ -167,11 +167,9 @@ export default function CallSheet() {
               <input
                 id="cs-dates"
                 className={styles.input}
-                type="text"
+                type="date"
                 value={form.dates}
                 onChange={(e) => set("dates", e.target.value)}
-                placeholder={b.placeholders.dates}
-                autoComplete="off"
               />
             </Row>
 
