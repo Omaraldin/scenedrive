@@ -94,16 +94,8 @@ export default function Hero() {
       lastDrawn.current = -1;
     };
     fit();
-    const onResize = () => {
-      fit();
-      ScrollTrigger.refresh();
-    };
-    window.addEventListener("resize", onResize);
-    window.addEventListener("orientationchange", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-      window.removeEventListener("orientationchange", onResize);
-    };
+    window.addEventListener("resize", fit);
+    return () => window.removeEventListener("resize", fit);
   }, []);
 
   // Play only the active layers.

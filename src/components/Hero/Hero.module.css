@@ -1,5 +1,5 @@
-.track { position: relative; width: 100%; max-width: 100%; height: 520vh; background: #000; overflow: hidden; }
-.stage { position: sticky; top: 0; inset-inline-start: 0; width: 100%; max-width: 100%; height: 100vh; height: 100svh; overflow: hidden; background: #000; }
+.track { position: relative; width: 100vw; width: 100dvw; max-width: none; height: 520vh; background: #000; }
+.stage { position: sticky; top: 0; inset-inline-start: 0; width: 100vw; width: 100dvw; max-width: none; height: 100vh; height: 100svh; overflow: hidden; background: #000; }
 
 .screen { position: absolute; inset: 0; }
 .layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.05s linear; will-change: transform, opacity; transform-origin: 50% 50%; }
@@ -102,8 +102,8 @@
 
 @media (max-width: 900px) {
   .track { height: 420vh; }
-  .track, .stage, .screen { width: 100%; max-width: 100%; }
-  .layer { width: 100%; max-width: 100%; }
+  .track, .stage, .screen { min-width: 100vw; min-width: 100dvw; max-width: none; }
+  .layer { width: 100vw; width: 100dvw; max-width: none; }
   .bar { height: 0; }
   .hud, .hudEnd { top: 106px; font-size: 11px; gap: 10px; }
   .hud { inset-inline-start: 16px; } .hudEnd { inset-inline-end: 16px; }

@@ -20,7 +20,6 @@
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(to bottom, rgba(11, 11, 13, 0.6), transparent);
   background: linear-gradient(to bottom, color-mix(in srgb, var(--ink) 60%, transparent), transparent);
   opacity: 1;
   transition: opacity 0.3s var(--ease);
@@ -135,10 +134,7 @@
   transition: background-color 0.2s var(--ease);
 }
 .pill:hover,
-.pill:focus-visible {
-  background-color: rgba(216, 35, 47, 0.22);
-  background-color: color-mix(in srgb, var(--red) 22%, transparent);
-}
+.pill:focus-visible { background-color: color-mix(in srgb, var(--red) 22%, transparent); }
 
 .right .cta {
   height: 40px;
@@ -160,7 +156,6 @@
     width: 100%; height: 40px;
     display: flex; align-items: stretch; justify-content: space-between;
     gap: 0;
-    border-top: 1px solid rgba(42, 42, 47, 0.7);
     border-top: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
   }
   .links a {
