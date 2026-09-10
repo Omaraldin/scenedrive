@@ -5,7 +5,7 @@ import type { Dictionary, Locale } from "@/i18n";
 import GarageGrid from "./GarageGrid";
 import styles from "./Garage.module.css";
 
-const OPENER_ID = "mclaren-600lt-spider";
+const OPENER_ID = "porsche-718-boxster";
 const openerCar = fleet.find((c) => c.id === OPENER_ID);
 const openerBay = String(fleet.findIndex((c) => c.id === OPENER_ID) + 1).padStart(2, "0");
 
@@ -25,8 +25,8 @@ export default function Garage({ t }: Props) {
 
         <div className={styles.opener}>
           <VideoLoop
-            src="loop/garage_600lt.mp4"
-            poster="loop/garage_600lt.jpg"
+            src="loop/garage_porsche718.mp4"
+            poster="loop/garage_porsche718.jpg"
             mode="inview"
             className={styles.openerVideo}
             alt={openerName}

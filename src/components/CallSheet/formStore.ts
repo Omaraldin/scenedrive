@@ -31,10 +31,13 @@ function readForm(raw: string): Form {
   const saved = JSON.parse(raw) as Partial<Record<keyof Form | "crash", unknown>>;
   const str = (v: unknown) => (typeof v === "string" ? v : "");
   const type = str(saved.type);
+  // Some sheets saved before `dates` was a native <input type="date"> carry a
+  // localized string (e.g. "16 أكتوبر") that the date input can't parse; drop it.
+  const isoDate = (v: unknown) => (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : "");
   return {
     type: LEGACY_TYPES[type] ?? type,
     extra: str(saved.extra),
-    dates: str(saved.dates),
+    dates: isoDate(saved.dates),
     location: str(saved.location),
     action: saved.action === true,
     name: str(saved.name),

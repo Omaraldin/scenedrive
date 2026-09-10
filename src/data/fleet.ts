@@ -23,7 +23,7 @@ const c = (car: Omit<Car, "crashEligible">): Car => ({ ...car, crashEligible: tr
 
 export const fleet: Car[] = [
   // Ferrari
-  c({ id: "ferrari-f8-tributo", make: "Ferrari", model: "F8 Tributo", category: "supercar", role: "Hero car. Red, mid-engine, unmistakable.", seenIn: ["Saqr w Kanarya"], reel: "DWudGrWDKBK_00.mp4", card: "DWudGrWDKBK_00.jpg", photo: "DYCw4w6jCwy_00.jpg" }),
+  c({ id: "ferrari-f8-tributo", make: "Ferrari", model: "F8 Tributo", category: "supercar", role: "Hero car. Red, mid-engine, unmistakable.", seenIn: ["Saqr w Kanarya", "Coca-Cola"], reel: "DWudGrWDKBK_00.mp4", card: "DWudGrWDKBK_00.jpg", photo: "DYCw4w6jCwy_00.jpg" }),
   c({ id: "ferrari-488-pista", make: "Ferrari", model: "488 Pista", category: "supercar", role: "Track-bred. Stripes read on camera.", seenIn: [], reel: "DW5LL_4iHDg_00.mp4", card: "DW5LL_4iHDg_00.jpg" }),
   c({ id: "ferrari-california", make: "Ferrari", model: "California", category: "sports", role: "Convertible. Faces in shot, wind in hair.", card: "card_ferrari-california.jpg", seenIn: ["Fresh", "Mountain View"], reel: "DYBEPtiCDZp_02.mp4", photo: "DYBEPtiCDZp_00.jpg" }),
   c({ id: "ferrari-f430", make: "Ferrari", model: "F430", category: "supercar", role: "Classic-era Ferrari lines.", card: "card_ferrari-f430.jpg", seenIn: ["Italiano"], photo: "DVt5LdeDGot_00.jpg", reel: "DVt5LdeDGot_02.mp4" }),
@@ -46,7 +46,7 @@ export const fleet: Car[] = [
   c({ id: "mercedes-sls-amg", make: "Mercedes-Benz", model: "SLS AMG", category: "supercar", role: "Gullwing doors.", seenIn: [], reel: "DXQEzs-DJ44_00.mp4", card: "DXQEzs-DJ44_00.jpg" }),
   c({ id: "mercedes-amg", make: "Mercedes-AMG", model: "SL Roadster", category: "sports", role: "AMG roadster, black.", card: "card_mercedes-amg.jpg", seenIn: [], photo: "DYsyNBpDMwf_00.jpg" }),
   c({ id: "mercedes-sl", make: "Mercedes-Benz", model: "SL", category: "sports", role: "Roadster with period feel.", seenIn: ["Kazablanka", "Les Baghdad"], reel: "DX4hMKvsB5h_00.mp4", card: "DVxD-BMiAfy_00.jpg" }),
-  c({ id: "mercedes-g-class", make: "Mercedes-Benz", model: "G-Class", category: "suv", role: "The boss car. Black or white.", seenIn: ["Gaafar El Omda", "Wahed Tany", "Welad Rizk 3", "Afroto", "e& · Etisalat"], reel: "DUqjkHRjHBo_01.mp4", card: "DUTwoOsjGly_00.jpg", photo: "DVuNHf5jHWx_00.jpg" }),
+  c({ id: "mercedes-g-class", make: "Mercedes-Benz", model: "G-Class", category: "suv", role: "The boss car. Black or white.", seenIn: ["Gaafar El Omda", "Wahed Tany", "Welad Rizk 3", "Afroto", "e& · Etisalat", "El Melouk"], reel: "DUqjkHRjHBo_01.mp4", card: "DUTwoOsjGly_00.jpg", photo: "DVuNHf5jHWx_00.jpg" }),
   c({ id: "mercedes-e-class", make: "Mercedes-Benz", model: "E-Class", category: "luxury", role: "Executive sedan for city scenes.", card: "card_mercedes-e-class.jpg", seenIn: ["Siret Hob"], photo: "DYk6sFsDC8m_00.jpg" }),
   // BMW
   c({ id: "bmw-i8-roadster", make: "BMW", model: "i8 Roadster", category: "supercar", role: "Butterfly doors, futuristic.", seenIn: ["Marwan Pablo"], reel: "DUvpV4YjHaL_03.mp4", card: "DUbrHc-DHwE_00.jpg", photo: "DYvR0YLjCCP_00.jpg" }),

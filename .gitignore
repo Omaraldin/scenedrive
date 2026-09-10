@@ -51,3 +51,4 @@ raw/
 /public/media/v/
 /.qa-*/
 /qa-*.png
+.tmp/
